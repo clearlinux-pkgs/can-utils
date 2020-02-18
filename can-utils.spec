@@ -4,13 +4,14 @@
 #
 Name     : can-utils
 Version  : 2018.02.0
-Release  : 1
+Release  : 2
 URL      : https://github.com/linux-can/can-utils/archive/v2018.02.0.tar.gz
 Source0  : https://github.com/linux-can/can-utils/archive/v2018.02.0.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause
 Requires: can-utils-bin = %{version}-%{release}
+Patch1: 0001-fix-include-to-find-SIOCGSTAMP-with-latest-kernel.patch
 
 %description
 <p align="center">
@@ -27,19 +28,25 @@ bin components for the can-utils package.
 
 %prep
 %setup -q -n can-utils-2018.02.0
+cd %{_builddir}/can-utils-2018.02.0
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1556029424
-export LDFLAGS="${LDFLAGS} -fno-lto"
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1582054526
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 %autogen --disable-static
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1556029424
+export SOURCE_DATE_EPOCH=1582054526
 rm -rf %{buildroot}
 %make_install
 
