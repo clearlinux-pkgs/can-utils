@@ -1,6 +1,7 @@
-Configure miss: whether SO_RXQ_OVFL is declared
-Configure miss: whether PF_CAN is declared
+Configure miss: gcc options needed to detect all undeclared functions
 Configure miss: whether AF_CAN is declared
 Configure miss: whether N_SLCAN is declared
+Configure miss: whether PF_CAN is declared
 Configure miss: whether SCM_TIMESTAMPING_OPT_STATS is declared
+Configure miss: whether SO_RXQ_OVFL is declared
 Configure miss: whether to enable debugging
